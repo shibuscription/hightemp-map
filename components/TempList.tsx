@@ -42,8 +42,8 @@ export default function TempList({ data, selectedId, onSelect }: Props) {
             <div className="flex justify-between items-center">
               <span className="flex items-center gap-1">
                 <span
-                  className="inline-block w-3 h-3 rounded-full"
-                  style={{ backgroundColor: getRankColor(item.rank) }}
+                  className="inline-block w-[12px] h-[12px] rounded-full"
+                  style={{ backgroundColor: getRankColor(Number(item.rank)) }}
                 ></span>
                 #{item.rank} {item.pref} {item.city}
               </span>
