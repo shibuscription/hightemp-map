@@ -12,9 +12,8 @@ const now = new Date();
 // JST にずらす
 const jst = new Date(now.getTime() + (9 * 60 * 60 * 1000));
 
-// JST で md と ymdhm を作る
+// JST で md を作る
 const md = `${String(jst.getMonth() + 1).padStart(2, '0')}${String(jst.getDate()).padStart(2, '0')}`;
-const ymdhm = `${jst.getFullYear()}${String(jst.getMonth() + 1).padStart(2, '0')}${String(jst.getDate()).padStart(2, '0')}-${String(jst.getHours()).padStart(2, '0')}${String(jst.getMinutes()).padStart(2, '0')}`;
 
 // URL
 const url = `http://www.data.jma.go.jp/obd/stats/data/mdrr/rank_daily/data${md}.html`;
@@ -106,6 +105,23 @@ fetch(url)
     });
 
     console.log(`✅ High: ${resultHigh.length}件, Low: ${resultLow.length}件`);
+
+    // 取得した HTML から見出しを取る
+    const nowText = $('div#main h1').text().trim();
+
+    // 正規表現で月・日・時・分を取る
+    const match = nowText.match(/（(\d+)月(\d+)日）(\d+)時(\d+)分/);
+
+    let ymdhm = '';
+    if (match) {
+      const [, m, d, h, min] = match;
+      const y = now.getFullYear();
+      ymdhm = `${y}${String(m).padStart(2, '0')}${String(d).padStart(2, '0')}-${String(h).padStart(2, '0')}${String(min).padStart(2, '0')}`;
+      console.log(`📅 公式基準: ${ymdhm}`);
+    } else {
+      console.log('⚠️ 日時抽出失敗 → fallback to local time');
+      ymdhm = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}-${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}`;
+    }
 
     // 保存先
     const highDir = path.resolve(__dirname, '../data/high');
