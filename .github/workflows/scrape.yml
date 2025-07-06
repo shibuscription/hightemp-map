@@ -1,4 +1,4 @@
-name: Scrape High/Low Temp Data2
+name: Scrape High/Low Temp Data
 
 on:
   schedule:
