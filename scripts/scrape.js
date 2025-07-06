@@ -101,15 +101,13 @@ fetch(url)
     console.log(`✅ High: ${resultHigh.length}件, Low: ${resultLow.length}件`);
 
     // 保存先
-    fs.mkdirSync(`public/history/high`, { recursive: true });
-    fs.mkdirSync(`public/history/low`, { recursive: true });
+    fs.mkdirSync(`data/high`, { recursive: true });
+    fs.mkdirSync(`data/low`, { recursive: true });
 
-    fs.writeFileSync(`public/latest_high.json`, JSON.stringify(resultHigh, null, 2));
-    fs.writeFileSync(`public/latest_low.json`, JSON.stringify(resultLow, null, 2));
-
-    fs.writeFileSync(`public/history/high/${ymdhm}.json`, JSON.stringify(resultHigh, null, 2));
-    fs.writeFileSync(`public/history/low/${ymdhm}.json`, JSON.stringify(resultLow, null, 2));
-
+    fs.writeFileSync(`data/high/latest.json`, JSON.stringify(resultHigh, null, 2));
+    fs.writeFileSync(`data/low/latest.json`, JSON.stringify(resultLow, null, 2));
+    fs.writeFileSync(`data/high/${ymdhm}.json`, JSON.stringify(resultHigh, null, 2));
+    fs.writeFileSync(`data/low/${ymdhm}.json`, JSON.stringify(resultLow, null, 2));
 
     console.log(`🗂️ 保存完了: latest.json & ${ymdhm}.json`);
   })
