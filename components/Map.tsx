@@ -19,6 +19,15 @@ interface Props {
   onSelect: (code: string | null) => void;
 }
 
+const getRankColor = (rank: number) => {
+  if (rank === 1) return '#FF0000'; // 赤
+  if (rank === 2) return '#FF8C00'; // オレンジ
+  if (rank === 3) return '#FFFF00'; // 黄色
+  if (rank >= 4 && rank <= 6) return '#ADFF2F'; // 黄緑
+  if (rank >= 7 && rank <= 10) return '#00BFFF'; // 水色
+  return '#808080'; // それ以外
+};
+
 export default function Map({ data, selectedId, onSelect }: Props) {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const mapInstance = useRef<google.maps.Map | null>(null);
@@ -60,6 +69,14 @@ export default function Map({ data, selectedId, onSelect }: Props) {
         position: { lat: spot.lat, lng: spot.lon },
         map: mapInstance.current!,
         label: `${spot.rank}`,
+        icon: {
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 8,
+          fillColor: getRankColor(spot.rank),
+          fillOpacity: 1,
+          strokeWeight: 1,
+          strokeColor: '#333',
+        },
       });
 
       marker.addListener('click', () => {
