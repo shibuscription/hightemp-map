@@ -14,7 +14,8 @@ const ymdhm = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')
 const url = `http://www.data.jma.go.jp/obd/stats/data/mdrr/rank_daily/data${md}.html`;
 
 // 地点マスタをロード
-const amedas = JSON.parse(fs.readFileSync('public/amedas.json', 'utf8'));
+const amedasPath = path.resolve(__dirname, '../public/amedas.json');
+const amedas = JSON.parse(fs.readFileSync(amedasPath, 'utf8'));
 
 console.log(`🌐 ${url} を取得中...`);
 
@@ -101,13 +102,16 @@ fetch(url)
     console.log(`✅ High: ${resultHigh.length}件, Low: ${resultLow.length}件`);
 
     // 保存先
-    fs.mkdirSync(`data/high`, { recursive: true });
-    fs.mkdirSync(`data/low`, { recursive: true });
+    const highDir = path.resolve(__dirname, '../data/high');
+    const lowDir = path.resolve(__dirname, '../data/low');
 
-    fs.writeFileSync(`data/high/latest.json`, JSON.stringify(resultHigh, null, 2));
-    fs.writeFileSync(`data/low/latest.json`, JSON.stringify(resultLow, null, 2));
-    fs.writeFileSync(`data/high/${ymdhm}.json`, JSON.stringify(resultHigh, null, 2));
-    fs.writeFileSync(`data/low/${ymdhm}.json`, JSON.stringify(resultLow, null, 2));
+    fs.mkdirSync(highDir, { recursive: true });
+    fs.mkdirSync(lowDir, { recursive: true });
+
+    fs.writeFileSync(path.join(highDir, 'latest.json'), JSON.stringify(resultHigh, null, 2));
+    fs.writeFileSync(path.join(lowDir, 'latest.json'), JSON.stringify(resultLow, null, 2));
+    fs.writeFileSync(path.join(highDir, `${ymdhm}.json`), JSON.stringify(resultHigh, null, 2));
+    fs.writeFileSync(path.join(lowDir, `${ymdhm}.json`), JSON.stringify(resultLow, null, 2));
 
     console.log(`🗂️ 保存完了: latest.json & ${ymdhm}.json`);
   })

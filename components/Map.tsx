@@ -98,7 +98,6 @@ export default function Map({ data, selectedId, onSelect }: Props) {
     <div
       ref={mapRef}
       className="w-full h-full"
-      style={{ border: '5px solid red' }} // デバッグ用、OKなら消してOK！
     />
   );
 }
