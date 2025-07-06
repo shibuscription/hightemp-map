@@ -6,9 +6,15 @@ const fetch = (...args) =>
   import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 // 日付
+// UTC を取得
 const now = new Date();
-const md = `${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}`;
-const ymdhm = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}-${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}`;
+
+// JST にずらす
+const jst = new Date(now.getTime() + (9 * 60 * 60 * 1000));
+
+// JST で md と ymdhm を作る
+const md = `${String(jst.getMonth() + 1).padStart(2, '0')}${String(jst.getDate()).padStart(2, '0')}`;
+const ymdhm = `${jst.getFullYear()}${String(jst.getMonth() + 1).padStart(2, '0')}${String(jst.getDate()).padStart(2, '0')}-${String(jst.getHours()).padStart(2, '0')}${String(jst.getMinutes()).padStart(2, '0')}`;
 
 // URL
 const url = `http://www.data.jma.go.jp/obd/stats/data/mdrr/rank_daily/data${md}.html`;

@@ -2,12 +2,16 @@ name: Scrape High/Low Temp Data
 
 on:
   schedule:
-    - cron: "*/10 * * * *"  # 10分ごとに実行
-  workflow_dispatch:         # 手動実行もOK
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
+
+    # ← コレを追加！
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
@@ -27,4 +31,3 @@ jobs:
           git add data/
           git diff --cached --quiet || git commit -m "Auto update weather data"
           git push
-
