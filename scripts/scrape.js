@@ -30,7 +30,7 @@ fetch(url)
   .then(html => {
     const $ = cheerio.load(html);
 
-    const clean = (str) => str.replace(/[\]\s]+$/, '').trim();
+    const clean = (str) => str.replace(/[\]\)\（\(\s]+$/, '').trim();
 
     const joinAmedas = (pref, city) => {
       return amedas.find(a =>

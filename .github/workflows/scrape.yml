@@ -1,8 +1,8 @@
 name: Scrape High/Low Temp Data
-# This is a cron test run
+
 on:
   schedule:
-    - cron: "*/10 * * * *"
+    - cron: "0,10,20,30,40,50 * * * *"
   workflow_dispatch:
 
 jobs:
