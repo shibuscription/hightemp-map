@@ -566,8 +566,16 @@ video {
   margin-top: 0.5rem;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
 .flex {
   display: flex;
+}
+
+.h-\[12px\] {
+  height: 12px;
 }
 
 .h-full {
@@ -576,6 +584,10 @@ video {
 
 .h-screen {
   height: 100vh;
+}
+
+.w-\[12px\] {
+  width: 12px;
 }
 
 .w-full {
@@ -598,8 +610,16 @@ video {
   flex-wrap: wrap;
 }
 
+.items-center {
+  align-items: center;
+}
+
 .justify-between {
   justify-content: space-between;
+}
+
+.gap-1 {
+  gap: 0.25rem;
 }
 
 .gap-2 {
@@ -610,6 +630,10 @@ video {
   --tw-space-x-reverse: 0;
   margin-right: calc(1rem * var(--tw-space-x-reverse));
   margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.rounded-full {
+  border-radius: 9999px;
 }
 
 .border {
