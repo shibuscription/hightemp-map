@@ -9,7 +9,6 @@ jobs:
   scrape:
     runs-on: ubuntu-latest
 
-    # ← コレを追加！
     permissions:
       contents: write
 
