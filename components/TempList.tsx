@@ -17,12 +17,13 @@ interface Props {
   onSelect: (code: string | null) => void;
 }
 
-const getRankColor = (rank: number) => {
-  if (rank === 1) return '#FF0000'; // 赤
-  if (rank === 2) return '#FF8C00'; // オレンジ
-  if (rank === 3) return '#FFFF00'; // 黄色
-  if (rank >= 4 && rank <= 6) return '#ADFF2F'; // 黄緑
-  if (rank >= 7 && rank <= 10) return '#00BFFF'; // 水色
+const getRankColor = (rank: number | string) => {
+  const r = Number(rank);
+  if (r === 1) return '#FF0000'; // 赤
+  if (r === 2) return '#FF8C00'; // オレンジ
+  if (r === 3) return '#FFFF00'; // 黄色
+  if (r >= 4 && r <= 6) return '#ADFF2F'; // 黄緑
+  if (r >= 7 && r <= 10) return '#00BFFF'; // 水色
   return '#808080'; // その他
 };
 
