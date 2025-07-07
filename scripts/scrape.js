@@ -124,8 +124,8 @@ fetch(url)
     }
 
     // 保存先
-    const highDir = path.resolve(__dirname, '../data/high');
-    const lowDir = path.resolve(__dirname, '../data/low');
+    const highDir = path.resolve(__dirname, '../www/428ch/hightemp-map/data/high');
+    const lowDir = path.resolve(__dirname, '../www/428ch/hightemp-map/data/low');
 
     fs.mkdirSync(highDir, { recursive: true });
     fs.mkdirSync(lowDir, { recursive: true });

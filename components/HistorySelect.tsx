@@ -12,7 +12,7 @@ export default function HistorySelect({ selected, onSelect, type }: {
 
   useEffect(() => {
     const fetchHistory = async () => {
-      const res = await fetch(`/api/history?type=${type}`);
+      const res = await fetch(`/hightemp-map/data/history-${type}.json`);
       const data = await res.json();
       setGrouped(data.grouped);
       setRecent(data.recent);

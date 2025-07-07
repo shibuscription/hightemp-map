@@ -16,12 +16,14 @@ export default function Home() {
     if (!router.isReady) return;
 
     const fetchData = async () => {
-      const url = `/api/temps?type=${type}${date ? `&date=${date}` : ''}`;
+      // ✅ APIの代わりに直接 JSON を読む
+      const tempUrl = `/hightemp-map/data/${type}/${date ? `${date}.json` : 'latest.json'}`;
+      const amedasUrl = `/hightemp-map/amedas.json`;
 
-      const tempRes = await fetch(url);
+      const tempRes = await fetch(tempUrl);
       const tempData = await tempRes.json();
 
-      const amedasRes = await fetch('/amedas.json');
+      const amedasRes = await fetch(amedasUrl);
       const amedasData = await amedasRes.json();
 
       const mergedData = tempData.map((t: any) => {
@@ -45,7 +47,7 @@ export default function Home() {
     <main className="flex flex-col h-screen">
       <Header />
       <div className="flex flex-col md:flex-row flex-1 h-full">
-        <section className="w-full md:w-1/3 p-4 border border-blue-500">
+        <section className="w-full md:w-1/3 p-4 border border-blue-500 overflow-y-auto">
           <TempList
             data={merged}
             selectedId={selectedId}

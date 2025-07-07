@@ -40,9 +40,7 @@ export default function Map({ data, selectedId, onSelect }: Props) {
     if (!mapRef.current || mapInstance.current) return;
 
     const check = setInterval(() => {
-      console.log('window.google:', window.google);
       if (window.google && window.google.maps && mapRef.current) {
-        console.log('Creating Google Map...');
         mapInstance.current = new window.google.maps.Map(mapRef.current, {
           center: { lat: 37, lng: 139 },
           zoom: 5,
