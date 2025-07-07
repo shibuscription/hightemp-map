@@ -20,4 +20,3 @@ jobs:
           password: ${{ secrets.FTP_PASS }}
           local-dir: ./out/
           server-dir: /home/shibuya/www/428ch/hightemp-map/
-          dangerous-clean-slate: true
